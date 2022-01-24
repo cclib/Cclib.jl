@@ -1,0 +1,3 @@
+var documenterSearchIndex = {"docs":
+[{"location":"","page":"Home","title":"Home","text":"CurrentModule = Cclib","category":"page"},{"location":"#Cclib","page":"Home","title":"Cclib","text":"","category":"section"},{"location":"","page":"Home","title":"Home","text":"Documentation for Cclib.","category":"page"},{"location":"","page":"Home","title":"Home","text":"","category":"page"},{"location":"","page":"Home","title":"Home","text":"Modules = [Cclib]","category":"page"},{"location":"#Cclib.cclib","page":"Home","title":"Cclib.cclib","text":"cclib\n\nVariable from pyimport(\"cclib\"). Numerous methods are available through Python's dot-call syntax.\n\n\n\n\n\n","category":"constant"}]
+}
