@@ -28,6 +28,9 @@ jobs:
                 arch:
                     - x64
         steps:
+            # Installing cclib manually is currently required
+            - run: |
+                  pip install cclib
             - uses: actions/checkout@v2
             - uses: julia-actions/setup-julia@v1
               with:
@@ -44,6 +47,9 @@ jobs:
         name: Documentation
         runs-on: ubuntu-latest
         steps:
+            # Installing cclib manually is currently required
+            - run: |
+                  pip install cclib
             - uses: actions/checkout@v2
             - uses: julia-actions/setup-julia@v1
               with:
