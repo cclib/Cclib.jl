@@ -3,7 +3,7 @@ using Test
 
 @testset "Cclib.jl" begin
     @testset "API surface" begin
-        @test __version__ == "1.7.1"
+        @test Cclib.__version__ == "1.7.1"
 
         @testset "Checking the exported symbols are available" begin
             for s in [:__version__, :parser, :progress, :method, :bridge, :io,
