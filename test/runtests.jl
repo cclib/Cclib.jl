@@ -5,7 +5,7 @@ using Test
     filename = "water.out"
 
     @testset "Parsing a log file with ccopen" begin
-        parser = cclib.io.ccopen(filename)
+        parser = io.ccopen(filename)
         data = parser.parse()
 
         @test data.natom == 3
@@ -14,7 +14,7 @@ using Test
     end
 
     @testset "Parsing a log file with ccread" begin
-        data = cclib.io.ccread(filename)
+        data = io.ccread(filename)
 
         @test data.natom == 3
         @test data.nmo == 7
