@@ -10,11 +10,11 @@ Julia bindings to [cclib](https://github.com/cclib/cclib).
 Temptive implementation of an idea from
 [Open Chemistry's GSoC Ideas 2021](https://wiki.openchemistry.org/GSoC_Ideas_2021#Project:_Julia_bindings):
 
--   [x] bindings to cclib IO functionality
--   [x] Julia-native representation of cclib data objects, including cclib
-        attributes
--   [ ] bindings available on the default Julia package registry
--   [ ] an example application of using the bindings
+- [x] bindings to cclib IO functionality
+- [x] Julia-native representation of cclib data objects, including cclib
+      attributes
+- [ ] bindings available on the default Julia package registry
+- [ ] an example application of using the bindings
 
 See [cclib/cclib#1053](https://github.com/cclib/cclib/issues/1053) for more
 information (and
