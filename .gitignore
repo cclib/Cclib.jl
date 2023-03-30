@@ -3,3 +3,5 @@
 *.jl.mem
 /docs/build/
 proposal.docx
+.github/
+.gitignore
