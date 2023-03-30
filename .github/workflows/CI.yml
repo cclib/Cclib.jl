@@ -3,7 +3,7 @@ on:
   push:
     branches:
       - main
-    tags: "*"
+    tags: ['*']
   pull_request:
 concurrency:
   # Skip intermediate builds: always.
@@ -12,24 +12,20 @@ concurrency:
   cancel-in-progress: ${{ startsWith(github.ref, 'refs/pull/') }}
 jobs:
   test:
-    name: Julia ${{ matrix.version }} - ${{ matrix.os }} - ${{ matrix.arch }}
-      - ${{ github.event_name }}
+    name: Julia ${{ matrix.version }} - ${{ matrix.os }} - ${{ matrix.arch }} - ${{ github.event_name }}
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
         version:
-          - "1.2"
-          - "1.7"
-          - "nightly"
+          - '1.8'
+          - 'nightly'
         os:
           - ubuntu-latest
         arch:
           - x64
+          - x86
     steps:
-      # Installing cclib manually is currently required
-      - run: |
-          pip install cclib
       - uses: actions/checkout@v2
       - uses: julia-actions/setup-julia@v1
         with:
@@ -45,19 +41,18 @@ jobs:
   docs:
     name: Documentation
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      statuses: write
     steps:
-      # Installing cclib manually is currently required
-      - run: |
-          pip install cclib
       - uses: actions/checkout@v2
       - uses: julia-actions/setup-julia@v1
         with:
-          version: "1"
+          version: '1'
       - uses: julia-actions/julia-buildpkg@v1
       - uses: julia-actions/julia-docdeploy@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          DOCUMENTER_KEY: ${{ secrets.DOCUMENTER_KEY }}
       - run: |
           julia --project=docs -e '
             using Documenter: DocMeta, doctest

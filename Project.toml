@@ -1,14 +1,10 @@
 name = "Cclib"
-uuid = "6bf0c929-756b-4df7-ab0b-d621f7ebeba1"
-authors = ["Felipe S. S. Schneider <schneider.felipe@posgrad.ufsc.br> and contributors"]
-version = "0.1.0"
-
-[deps]
-PyCall = "438e738f-606a-5dbb-bf0a-cddfbfd45ab0"
+uuid = "1f23c3bf-5af7-41b5-853a-cf1bda1c288e"
+authors = ["Victor Cano Gil"]
+version = "1.0.0-DEV"
 
 [compat]
-PyCall = "1"
-julia = "1"
+julia = "1.8"
 
 [extras]
 Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"

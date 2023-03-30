@@ -4,10 +4,9 @@ CurrentModule = Cclib
 
 # Cclib
 
-Documentation for [Cclib](https://github.com/schneiderfelipe/Cclib.jl).
+Documentation for [Cclib](https://github.com/vcanogil/Cclib.jl).
 
 ```@index
-
 ```
 
 ```@autodocs
