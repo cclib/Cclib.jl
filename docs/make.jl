@@ -5,7 +5,7 @@ DocMeta.setdocmeta!(Cclib, :DocTestSetup, :(using Cclib); recursive=true)
 
 makedocs(;
     modules=[Cclib],
-    authors="Victor Cano Gil",
+    authors="Victor Hugo Cano Gil",
     repo="https://github.com/vcanogil/Cclib.jl/blob/{commit}{path}#{line}",
     sitename="Cclib.jl",
     format=Documenter.HTML(;
