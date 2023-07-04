@@ -1,3 +1,5 @@
+export cclibtypes
+
 cclibtypes = Dict(
     "aonames" => Array{String},
     "aooverlaps" => Array{Float64, 2},
@@ -72,13 +74,3 @@ cclibtypes = Dict(
     "vibsyms" => Array{String},
     "zpve" => Float64
 )
-
-using Cclib
-using PythonCall
-m3 = ccread("./test/data/Trp_polar_tdhf.out")
-
-for (key, value) in m3
-    type = cclibtypes[key]
-    m3[key] = pyconvert(type, value)
-end
-m3

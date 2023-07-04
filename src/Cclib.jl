@@ -1,6 +1,9 @@
 module Cclib
+using PythonCall
+using CondaPkg
 
-include("./functions.jl")
+include("functions.jl")
+include("config.jl")
 
 const cclib = Ref{Py}()
 
