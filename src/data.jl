@@ -39,7 +39,7 @@ cclibtypes = Dict(
     "mocoeffs" => Array{Array{Float64}},
     "moenergies" => Array{Array{Float64}},
     "moments" => Array{Array},
-    "mosysm" => Array{Array},
+    "mosyms" => Array{Array},
     "mpenergies" => Array{Array{Float64}},
     "mult" => Int64,
     "natom" => Int64,
@@ -50,15 +50,15 @@ cclibtypes = Dict(
     "nooccnos" => Array{Array},
     "optdone" => Bool,
     "optstatus" => Array{},
-    "polarizabilities" => Array{Array},
+    "polarizabilities" => Array{Array{Float64, 2}},
     "pressure" => Float64,
     "scancoords" => Array{},
     "scanenergies" => Array{},
     "scannames" => Array{String},
     "scanparm" => Array{Tuple},
-    "scfenergies" => Array{},
-    "scftargets" => Array{},
-    "scfvalues" => Array{},
+    "scfenergies" => Array{Float64},
+    "scftargets" => Array{Float64, 2},
+    "scfvalues" => Array{Array{Float64, 2}},
     "temperature" => Float64,
     "time" => Array{},
     "transprop" => Dict{Any, Any},
@@ -74,9 +74,11 @@ cclibtypes = Dict(
 )
 
 using Cclib
-m3 = ccread("./test/data/uracil_two.xyz")
+using PythonCall
+m3 = ccread("./test/data/Trp_polar_tdhf.out")
 
 for (key, value) in m3
     type = cclibtypes[key]
     m3[key] = pyconvert(type, value)
 end
+m3
