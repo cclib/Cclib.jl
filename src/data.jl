@@ -15,7 +15,7 @@ cclibtypes = Dict(
     "entropy" => Float64,
     "etenergies" => Array{Float64},
 
-    # subtypes for these?
+    # # subtypes for these?
     "etoscs" => Array{},
     "etdips" => Array{},
     "etveldips" => Array{},
@@ -29,8 +29,7 @@ cclibtypes = Dict(
     "fooverlaps" => Array{}, # subtype ?
     "fragnames" => Array{String},
     "frags" => Array{Array},
-
-    "gbasis" => Any{}, # PyQuante format
+    "gbasis" => Any, # PyQuante format
     "geotargets" => Array{},
     "geovalues" => Array{},
     "grads" => Array{},
@@ -46,7 +45,7 @@ cclibtypes = Dict(
     "natom" => Int64,
     "nbasis" => Int64,
     "nmo" => Int64,
-    "nmrtensors" => Any{}, # Find the right one for this one
+    "nmrtensors" => Any, # Find the right one for this one
     "nocoeffs" => Array{Array},
     "nooccnos" => Array{Array},
     "optdone" => Bool,
@@ -71,9 +70,10 @@ cclibtypes = Dict(
     "vibanharms" => Array{},
     "vibrmasses" => Array{},
     "vibsyms" => Array{String},
-    "zpve" => Float64,
+    "zpve" => Float64
 )
 
+using Cclib
 m3 = ccread("./test/data/uracil_two.xyz")
 
 for (key, value) in m3
