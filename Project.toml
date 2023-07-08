@@ -9,6 +9,7 @@ PyCall = "438e738f-606a-5dbb-bf0a-cddfbfd45ab0"
 PythonCall = "6099a3de-0909-46bc-b1f4-468b9a2dfc0d"
 
 [compat]
+CondaPkg = "0.2"
 PyCall = "1"
 julia = "1"
 
