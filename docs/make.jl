@@ -5,6 +5,7 @@ DocMeta.setdocmeta!(Cclib, :DocTestSetup, :(using Cclib); recursive=true)
 
 makedocs(;
     modules=[Cclib],
+    authors="cclib development team",
     repo="https://github.com/cclib/Cclib.jl",
     sitename="Cclib.jl",
     format=Documenter.HTML(;
