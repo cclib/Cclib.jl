@@ -1,6 +1,7 @@
 module Cclib
 using PythonCall
 using CondaPkg
+using Logging
 
 include("functions.jl")
 include("config.jl")
