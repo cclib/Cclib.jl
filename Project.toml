@@ -1,7 +1,7 @@
 name = "Cclib"
 uuid = "6bf0c929-756b-4df7-ab0b-d621f7ebeba1"
-authors = ["Felipe S. S. Schneider <schneider.felipe@posgrad.ufsc.br> and contributors"]
-version = "0.1.0"
+authors = ["cclib development team"]
+version = "0.2.0"
 
 [deps]
 CondaPkg = "992eb4ea-22a4-4c89-a5bb-47a3300528ab"
