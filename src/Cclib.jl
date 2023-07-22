@@ -1,6 +1,8 @@
 module Cclib
 using PythonCall
 using CondaPkg
+using AtomsBase
+using Unitful
 using Logging
 
 include("functions.jl")

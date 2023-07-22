@@ -1,3 +1,7 @@
+#
+# General functions for parsing chemical outputs
+#
+
 export ccread
 
 function pyccread(file)
