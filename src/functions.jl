@@ -1,4 +1,5 @@
 export ccread
+export get_data
 
 function pyccread(file)
     data = cclib[].io.ccread(file)

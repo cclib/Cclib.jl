@@ -5,6 +5,7 @@ using Logging
 
 include("functions.jl")
 include("config.jl")
+include("calculation_methods.jl")
 
 const cclib = Ref{Py}()
 
