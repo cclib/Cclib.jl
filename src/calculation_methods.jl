@@ -2,6 +2,17 @@
 # Calculation methods for qchem outputs
 #
 export cspa
+export mpa
+export density
+export lpa
+export bpa
+export density
+export mbo
+export cda
+export bader
+export ddec6
+export hpa
+
 
 function cspa(file::String)
     #TODO: read in the original data using Julia's ccread
@@ -21,10 +32,19 @@ end
 function bpa(file::String)
 end
 
-function getdensitymatrix(file::String)
+function density(file::String)
+    data = cclib[].io.ccread(file)
+    mol = cclib[].method.Density(data)
+    mol.calculate()
+    return pyconvert(Array{Float64}, mol.__dict__["density"])
 end
 
+#ToDo: check output dimensions?
 function mbo(file::String)
+    data = cclib[].io.ccread(file)
+    mol = cclib[].method.MBO(data)
+    mol.calculate()
+    return pyconvert(Array{Float64}, mol.__dict__["fragresults"])
 end
 
 function cda(file::String)
