@@ -13,14 +13,17 @@ export bader
 export ddec6
 export hpa
 
+expand(x) = pyconvert(Array{Float64}, x[0]) |> x -> reshape(x, (1, size(x)...))
 
 function cspa(file::String)
-    #TODO: read in the original data using Julia's ccread
-    # and then append to that the analysis output
+    #TODO: implement the optional args from docs
     data = cclib[].io.ccread(file)
     mol = cclib[].method.CSPA(data)
     mol.calculate()
-    return mol
+    aoresults = mol.__dict__["aoresults"] |> expand
+    fragresults = mol.__dict__["fragresults"] |> expand
+    fragcharges = pyconvert(Array{Float64}, mol.__dict__["fragcharges"])
+    return (aoresults, fragresults, fragcharges)
 end
 
 function mpa(file::String)
