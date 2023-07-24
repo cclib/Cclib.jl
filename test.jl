@@ -6,10 +6,11 @@ cpsa = cclib.method.CSPA
 lpa = cclib.method.LPA
 bick = cclib.method.Bickelhaupt
 density = cclib.method.Density
-mol = cclib.io.ccread("./test/data/Trp_polar_tdhf.out")
+mol = cclib.io.ccread("./test/data/Trp_polar.fchk")
 
-a = cpsa(mol)
+a = lpa(mol)
 a.calculate()
+a.__dict__.keys()
 aoresults = a.__dict__["aoresults"]
 fragresults = a.__dict__["fragresults"]
 fragcharges = a.__dict__["fragcharges"]

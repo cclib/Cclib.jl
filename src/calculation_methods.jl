@@ -23,16 +23,37 @@ function cspa(file::String)
     aoresults = mol.__dict__["aoresults"] |> expand
     fragresults = mol.__dict__["fragresults"] |> expand
     fragcharges = pyconvert(Array{Float64}, mol.__dict__["fragcharges"])
-    return (aoresults, fragresults, fragcharges)
+    return aoresults, fragresults, fragcharges
 end
 
 function mpa(file::String)
+    data = cclib[].io.ccread(file)
+    mol = cclib[].method.MPA(data)
+    mol.calculate()
+    aoresults = mol.__dict__["aoresults"] |> expand
+    fragresults = mol.__dict__["fragresults"] |> expand
+    fragcharges = pyconvert(Array{Float64}, mol.__dict__["fragcharges"])
+    return aoresults, fragresults, fragcharges
 end
 
 function lpa(file::String)
+    data = cclib[].io.ccread(file)
+    mol = cclib[].method.LPA(data)
+    mol.calculate()
+    aoresults = mol.__dict__["aoresults"] |> expand
+    fragresults = mol.__dict__["fragresults"] |> expand
+    fragcharges = pyconvert(Array{Float64}, mol.__dict__["fragcharges"])
+    return aoresults, fragresults, fragcharges
 end
 
 function bpa(file::String)
+    data = cclib[].io.ccread(file)
+    mol = cclib[].method.Bickelhaupt(data)
+    mol.calculate()
+    aoresults = mol.__dict__["aoresults"] |> expand
+    fragresults = mol.__dict__["fragresults"] |> expand
+    fragcharges = pyconvert(Array{Float64}, mol.__dict__["fragcharges"])
+    return aoresults, fragresults, fragcharges
 end
 
 function density(file::String)
