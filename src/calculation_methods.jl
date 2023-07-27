@@ -71,7 +71,13 @@ function mbo(file::String)
     return pyconvert(Array{Float64}, mol.__dict__["fragresults"])
 end
 
-function cda(file::String)
+function cda(mol::String, frag1::String, frag2::String)
+    mol = cclib[].io.ccread(mol)
+    frag1 = cclib[].io.ccread(frag1)
+    frag2 = cclib[].io.ccread(frag2)
+    cda = cclib[].method.MBO(mol)
+    cda.calculate()
+    return cda
 end
 
 function bader(file::String)
