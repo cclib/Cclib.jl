@@ -17,3 +17,12 @@ fragcharges = a.__dict__["fragcharges"]
 
 x = pyconvert(Array{Float64}, fragcharges)
 reshape(x, (1, size(x)...))
+
+
+a = cda(
+    "./test/data/calculation_methods/cda/BH3CO-sp.log",
+    "./test/data/calculation_methods/cda/BH3.log",
+    "./test/data/calculation_methods/cda/CO.log",
+)
+a.__dict__.keys()
+z = a.__dict__["donations"]
