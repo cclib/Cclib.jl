@@ -13,7 +13,8 @@ export bader
 export ddec6
 export hpa
 
-expand(x) = pyconvert(Array{Float64}, x[0]) |> x -> reshape(x, (1, size(x)...))
+# remake this function such that it's not (1, size(x)) but len(x), size(x)
+expand(x) = pyconvert(Array{Float64}, x[0]) |> x -> reshape(length(x), (1, size(x)...))
 
 function cspa(file::String)
     #TODO: implement the optional args from docs
@@ -71,20 +72,19 @@ function mbo(file::String)
     return pyconvert(Array{Float64}, mol.__dict__["fragresults"])
 end
 
+#TODO Figure out the dimensions
 function cda(mol::String, frag1::String, frag2::String)
     mol = cclib[].io.ccread(mol)
     frag1 = cclib[].io.ccread(frag1)
     frag2 = cclib[].io.ccread(frag2)
-    cda = cclib[].method.MBO(mol)
-    cda.calculate()
-    return cda
+    mol = cclib[].method.CDA(mol)
+    mol.calculate([frag1, frag2])
+    return mol
+    # donations = mol.__dict__["donations"] |> expand
+    # bdonations = mol.__dict__["bdonations"] |> expand
+    # repulsions = mol.__dict__["repulsions"] |> expand
+    # return donations, bdonations, repulsions
 end
 
 function bader(file::String)
-end
-
-function ddec6(file::String)
-end
-
-function hpa(file::String)
 end
