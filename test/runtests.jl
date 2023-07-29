@@ -1,6 +1,8 @@
 using Cclib
 using PythonCall
 using Test
+using AtomsBase
+
 
 
 @testset "Cclib.jl" begin
@@ -18,4 +20,11 @@ using Test
     # Check that it handles unsupported files correctly
     @test isnothing(ccread("./data/invalid_file.txt"))
     @test isnothing(ccread("./data/"))
+
+    # Check AtomsBase Integration
+    @test get_atom_objects("./data/uracil_two.xyz")[1] |> atomic_number == 7
+    @test get_atom_objects("./data/uracil_two.xyz")[1] |> atomic_symbol == :N
+    @test get_atom_objects("./data/uracil_two.xyz")[6] |> atomic_number == 6
+    @test get_atom_objects("./data/uracil_two.xyz")[6] |> atomic_symbol == :C
+
 end
