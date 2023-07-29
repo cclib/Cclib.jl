@@ -20,6 +20,24 @@ function get_data(file)
     return datadict
 end
 
+"""
+    ccread(file::String)
+
+Read in the file of supported format and store the data
+it contains in a dictionary.
+Properties read in are accessible as dictionary keys.
+
+### Example
+```Julia
+julia> mol = ccread("uracil_two.xyz")
+julia> keys(mol)
+KeySet for a Dict{String, Any} with 4 entries. Keys:
+  "atomcoords"
+  "natom"
+  "atomnos"
+  "metadata"
+```
+"""
 function ccread(file)
     try
         if !isfile(file)
