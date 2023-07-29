@@ -27,4 +27,9 @@ using AtomsBase
     @test get_atom_objects("./data/uracil_two.xyz")[6] |> atomic_number == 6
     @test get_atom_objects("./data/uracil_two.xyz")[6] |> atomic_symbol == :C
 
+    @test get_atom_objects(ccread("./data/uracil_two.xyz"))[1] |> atomic_number == 7
+    @test get_atom_objects(ccread("./data/uracil_two.xyz"))[1] |> atomic_symbol == :N
+    @test get_atom_objects(ccread("./data/uracil_two.xyz"))[6] |> atomic_number == 6
+    @test get_atom_objects(ccread("./data/uracil_two.xyz"))[6] |> atomic_symbol == :C
+
 end
