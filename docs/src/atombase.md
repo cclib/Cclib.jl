@@ -3,6 +3,7 @@
 Cclib.jl allows loading atom information into [AtomsBase.jl](https://github.com/JuliaMolSim/AtomsBase.jl) objects using `get_atom_objects` function:
 
 ```Julia
+# Input file can be found in the in the repo under "test" folder
 julia> using Cclib
 julia> using AtomsBase
 julia> mol = ccread("./Trp_polar.fchk")
@@ -61,7 +62,7 @@ FlexibleSystem(C₁₁H₁₂N₂O₂, periodic = TTT):
     |/                       N/
     *------------------------*
 ```
-We can now perform calculate several properties of the system:
+We can now perform calculate various properties of the system:
 ```Julia
 julia> ϵ = 1.0 * 1u"eV"
 julia> σ = 0.25 * 1u"Å"

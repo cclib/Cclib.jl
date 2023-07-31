@@ -7,6 +7,7 @@ Properties that can be parsed and supported file formats can be found [here](htt
 
 # How to read files
 ```Julia
+# Input file can be found in the in the repo under "test" folder
 julia> using Cclib
 julia> mol = ccread("uracil_two.xyz")
 ```
