@@ -13,9 +13,23 @@ export bader
 export ddec6
 export hpa
 
-# remake this function such that it's not (1, size(x)) but len(x), size(x)
-expand(x) = pyconvert(Array{Float64}, x[0]) |> x -> reshape(length(x), (1, size(x)...))
+# dimensions of some outputs are NxMxK, however python return dimension N as a list
+# which needs to be adjusted
+function expand(x)
+    N = length(x)
+    x = pyconvert(Array{Float64}, x[0])
+    return reshape(x, (N, size(x)...))
+end
 
+"""
+    cspa(file::String)
+
+C-Squared Population Analysis (CSPA)
+# Arguments
+- `file::String`: Cclib-supported output file
+# Returns
+tuple (aoresults, fragresults, fragcharges)
+"""
 function cspa(file::String)
     #TODO: implement the optional args from docs
     data = cclib[].io.ccread(file)
@@ -27,6 +41,15 @@ function cspa(file::String)
     return aoresults, fragresults, fragcharges
 end
 
+"""
+    mpa(file::String)
+
+Mulliken Population Analysis
+# Arguments
+- `file::String`: Cclib-supported output file
+# Returns
+tuple (aoresults, fragresults, fragcharges)
+"""
 function mpa(file::String)
     data = cclib[].io.ccread(file)
     mol = cclib[].method.MPA(data)
@@ -37,6 +60,15 @@ function mpa(file::String)
     return aoresults, fragresults, fragcharges
 end
 
+"""
+    mpa(file::String)
+
+Lowdin Population Analysis
+# Arguments
+- `file::String`: Cclib-supported output file
+# Returns
+tuple (aoresults, fragresults, fragcharges)
+"""
 function lpa(file::String)
     data = cclib[].io.ccread(file)
     mol = cclib[].method.LPA(data)
@@ -47,6 +79,15 @@ function lpa(file::String)
     return aoresults, fragresults, fragcharges
 end
 
+"""
+    bpa(file::String)
+
+Bickelhaupt Population Analysis
+# Arguments
+- `file::String`: Cclib-supported output file
+# Returns
+tuple (aoresults, fragresults, fragcharges)
+"""
 function bpa(file::String)
     data = cclib[].io.ccread(file)
     mol = cclib[].method.Bickelhaupt(data)
@@ -79,11 +120,10 @@ function cda(mol::String, frag1::String, frag2::String)
     frag2 = cclib[].io.ccread(frag2)
     mol = cclib[].method.CDA(mol)
     mol.calculate([frag1, frag2])
-    return mol
-    # donations = mol.__dict__["donations"] |> expand
-    # bdonations = mol.__dict__["bdonations"] |> expand
-    # repulsions = mol.__dict__["repulsions"] |> expand
-    # return donations, bdonations, repulsions
+    donations = mol.__dict__["donations"] |> expand
+    bdonations = mol.__dict__["bdonations"] |> expand
+    repulsions = mol.__dict__["repulsions"] |> expand
+    return donations, bdonations, repulsions
 end
 
 function bader(file::String)

@@ -15,8 +15,10 @@ aoresults = a.__dict__["aoresults"]
 fragresults = a.__dict__["fragresults"]
 fragcharges = a.__dict__["fragcharges"]
 
-x = pyconvert(Array{Float64}, fragcharges)
-reshape(x, (1, size(x)...))
+# x = pyconvert(Array{Float64}, fragcharges)
+# reshape(x, (1, size(x)...))
+
+b = mpa("./test/data/Trp_polar.fchk")
 
 
 a = cda(
@@ -25,4 +27,5 @@ a = cda(
     "./test/data/calculation_methods/cda/CO.log",
 )
 a.__dict__.keys()
+a.__dict__["repulsions"]
 z = a.__dict__["donations"]
