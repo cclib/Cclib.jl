@@ -44,7 +44,7 @@ KeySet for a Dict{String, Any} with 4 entries. Keys:
   "metadata"
 ```
 """
-function ccread(file)
+function ccread(file::String)
     try
         if !isfile(file)
             @error "$(file) is not file"

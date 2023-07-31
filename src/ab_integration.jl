@@ -37,11 +37,5 @@ into a list of AtomsBase atom objects.
 A list of AtomsBase atom objects
 """
 function get_atom_objects(mol::String)
-    mol = ccread(mol)
-    atoms = [
-             Atom(mol["atomnos"][i],
-             vec(mol["atomcoords"][:, i, :])u"Å")
-             for i in 1:mol["natom"]
-            ]
-    return atoms
+    return get_atom_objects(ccread(mol))
 end
