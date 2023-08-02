@@ -1,10 +1,14 @@
 module Cclib
 using PythonCall
 using CondaPkg
+using AtomsBase
+using Unitful
+using UnitfulAtomic
 using Logging
 
-include("functions.jl")
 include("config.jl")
+include("functions.jl")
+include("ab_integration.jl")
 
 const cclib = Ref{Py}()
 

@@ -2,11 +2,12 @@
 
 This page outlines how to access information store in computational chemistry output files.
 
-### Supported formats
-Properties that can be parsed and supported file formats can be found [here](https://cclib.github.io/data.html").
+# Supported formats
+Properties that can be parsed and supported file formats can be found [here](https://cclib.github.io/data.html#details-of-current-implementation").
 
-### How to read files
+# How to read files
 ```Julia
+# Input file can be found in the in the repo under "test" folder
 julia> using Cclib
 julia> mol = ccread("uracil_two.xyz")
 ```
