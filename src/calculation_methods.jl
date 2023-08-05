@@ -10,8 +10,6 @@ export density
 export mbo
 export cda
 export bader
-export ddec6
-export hpa
 
 # dimensions of some outputs are NxMxK, however python return dimension N as a list, not an array
 function expand(x)
@@ -27,7 +25,10 @@ C-Squared Population Analysis (CSPA)
 # Arguments
 - `file::String`: Cclib-supported output file
 # Returns
-Tuple (aoresults, fragresults, fragcharges)
+Tuple with 3 elements:
+- `aoresults`: a three dimensional array with spin, molecular orbital, and atomic orbitals as the axes, so that ``aoresults[1][46][1]`` gives the contribution of the 1st atomic orbital to the 46th alpha/restricted molecular orbital,
+- `fragresults`: a three dimensional array with spin, molecular orbital, and atoms as the axes, so that ``fragresults[1][24][5]`` gives the contribution of the 5th fragment orbitals to the 24th beta molecular orbital)
+- `fragcharges`: a vector with the number of (partial) electrons in each fragment, so that ``fragcharges[3]`` gives the number of electrons in the 3rd fragment.
 """
 function cspa(file::String)
     #TODO: implement the optional args from docs
@@ -47,7 +48,10 @@ Mulliken Population Analysis
 # Arguments
 - `file::String`: Cclib-supported output file
 # Returns
-Tuple (aoresults, fragresults, fragcharges)
+Tuple with 3 elements:
+- `aoresults`: a three dimensional array with spin, molecular orbital, and atomic orbitals as the axes, so that ``aoresults[1][46][1]`` gives the contribution of the 1st atomic orbital to the 46th alpha/restricted molecular orbital,
+- `fragresults`: a three dimensional array with spin, molecular orbital, and atoms as the axes, so that ``fragresults[1][24][5]`` gives the contribution of the 5th fragment orbitals to the 24th beta molecular orbital)
+- `fragcharges`: a vector with the number of (partial) electrons in each fragment, so that ``fragcharges[3]`` gives the number of electrons in the 3rd fragment.
 """
 function mpa(file::String)
     data = cclib[].io.ccread(file)
@@ -66,7 +70,10 @@ Lowdin Population Analysis
 # Arguments
 - `file::String`: Cclib-supported output file
 # Returns
-Tuple (aoresults, fragresults, fragcharges)
+Tuple with 3 elements:
+- `aoresults`: a three dimensional array with spin, molecular orbital, and atomic orbitals as the axes, so that ``aoresults[1][46][1]`` gives the contribution of the 1st atomic orbital to the 46th alpha/restricted molecular orbital,
+- `fragresults`: a three dimensional array with spin, molecular orbital, and atoms as the axes, so that ``fragresults[1][24][5]`` gives the contribution of the 5th fragment orbitals to the 24th beta molecular orbital)
+- `fragcharges`: a vector with the number of (partial) electrons in each fragment, so that ``fragcharges[3]`` gives the number of electrons in the 3rd fragment.
 """
 function lpa(file::String)
     data = cclib[].io.ccread(file)
@@ -85,7 +92,10 @@ Bickelhaupt Population Analysis
 # Arguments
 - `file::String`: Cclib-supported output file
 # Returns
-Tuple (aoresults, fragresults, fragcharges)
+Tuple with 3 elements:
+- `aoresults`: a three dimensional array with spin, molecular orbital, and atomic orbitals as the axes, so that ``aoresults[1][46][1]`` gives the contribution of the 1st atomic orbital to the 46th alpha/restricted molecular orbital,
+- `fragresults`: a three dimensional array with spin, molecular orbital, and atoms as the axes, so that ``fragresults[1][24][5]`` gives the contribution of the 5th fragment orbitals to the 24th beta molecular orbital)
+- `fragcharges`: a vector with the number of (partial) electrons in each fragment, so that ``fragcharges[3]`` gives the number of electrons in the 3rd fragment.
 """
 function bpa(file::String)
     data = cclib[].io.ccread(file)
@@ -104,7 +114,8 @@ Density matrix calculation
 # Arguments
 - `file::String`: Cclib-supported output file
 # Returns
-Density Matrix
+- An array with three axes. The first axis is for the spin contributions,
+the second and the third axes for the density matrix, which follows standard definition.
 """
 function density(file::String)
     data = cclib[].io.ccread(file)
@@ -121,7 +132,7 @@ Calculate Mayer's bond orders
 # Arguments
 - `file::String`: Cclib-supported output file
 # Returns
-Array of rank 3. The first axis is for contributions of each spin to the MBO,
+- An array with three axes. The first axis is for contributions of each spin to the MBO,
 while the second and third correspond to the indices of the atoms.
 """
 function mbo(file::String)
@@ -137,9 +148,13 @@ end
 
 Charge decomposition analysis
 # Arguments
-- `file::String`: Cclib-supported output file
+- `mol::String`: Cclib-supported output file
+- `frag1::String`: Cclib-supported output file
+- `frag2::String`: Cclib-supported output file
 # Returns
-Tuple (donations, backdonations, repulsions)
+- Tuple (donations, backdonations, repulsions)
+donations, bdonations (back donations), and repulsions attributes.
+These attributes are simply lists of 1-dimensional arrays corresponding to the restricted or alpha/beta molecular orbitals of the entire molecule.
 """
 function cda(mol::String, frag1::String, frag2::String)
     mol = cclib[].io.ccread(mol)
@@ -153,24 +168,26 @@ function cda(mol::String, frag1::String, frag2::String)
     return donations, bdonations, repulsions
 end
 
-"""
-    bader(file::String)
+# TODO: this requires PyQuante which doens't seem to work
+# when trying to install it into a conda env
+# """
+#     bader(file::string)
 
-Bader's QTAIM charges calculation
-# Arguments
-- `file::String`: Cclib-supported output file
-# Returns
-Tuple (donations, backdonations, repulsions)
-"""
-function bader(file::String, vol::Vector{Vector})
-    data = cclib[].io.ccread(file)
-    vol = pytuple(pytuple(i) for i in vol)
-    vol = cclib[].method.Volume(vol...)
-    mol = cclib[].method.Bader(data, vol)
-    mol.calculate()
-    return mol
-    # aoresults = mol.__dict__["aoresults"] |> expand
-    # fragresults = mol.__dict__["fragresults"] |> expand
-    # fragcharges = pyconvert(Array{Float64}, mol.__dict__["fragcharges"])
-    # return aoresults, fragresults, fragcharges
-end
+# bader's qtaim charges calculation
+# # arguments
+# - `file::string`: cclib-supported output file
+# # returns
+# tuple (donations, backdonations, repulsions)
+# """
+# function bader(file::string, vol::vector{vector{float64}})
+#     data = cclib[].io.ccread(file)
+#     vol = pytuple(pytuple(i) for i in vol)
+#     vol = cclib[].method.volume(vol...)
+#     mol = cclib[].method.bader(data, vol)
+#     mol.calculate()
+#     return mol
+#     # aoresults = mol.__dict__["aoresults"] |> expand
+#     # fragresults = mol.__dict__["fragresults"] |> expand
+#     # fragcharges = pyconvert(array{float64}, mol.__dict__["fragcharges"])
+#     # return aoresults, fragresults, fragcharges
+# end
