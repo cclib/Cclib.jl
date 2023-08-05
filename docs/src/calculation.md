@@ -11,8 +11,8 @@ julia> using Cclib
 julia> aoresults, fragresults, fragcharges = cspa("./Trp_polar.fchk")
 ```
 
-* ``aoresults``: a three dimensional array with spin, molecular orbital, and atomic orbitals as the axes, so that ``aoresults[1][46][1]`` gives the contribution of the 1st atomic orbital to the 46th alpha/restricted molecular orbital,
-* ``fragresults``: a three dimensional array with spin, molecular orbital, and atoms as the axes, so that ``fragresults[1][24][5]`` gives the contribution of the 5th fragment orbitals to the 24th beta molecular orbital)
+* ``aoresults``: a three dimensional array with spin, molecular orbital, and atomic orbitals as the axes, so that ``aoresults[1, 46, 1]`` gives the contribution of the 1st atomic orbital to the 46th alpha/restricted molecular orbital,
+* ``fragresults``: a three dimensional array with spin, molecular orbital, and atoms as the axes, so that ``fragresults[1, 24, 5]`` gives the contribution of the 5th fragment orbitals to the 24th beta molecular orbital)
 * ``fragcharges``: a vector with the number of (partial) electrons in each fragment, so that ``fragcharges[3]`` gives the number of electrons in the 3rd fragment.
 
 # Mulliken population analysis (MPA)
@@ -23,8 +23,8 @@ julia> using Cclib
 julia> aoresults, fragresults, fragcharges = mpa("./Trp_polar.fchk")
 ```
 
-* ``aoresults``: a three dimensional array with spin, molecular orbital, and atomic orbitals as the axes, so that ``aoresults[1][46][1]`` gives the contribution of the 1st atomic orbital to the 46th alpha/restricted molecular orbital,
-* ``fragresults``: a three dimensional array with spin, molecular orbital, and atoms as the axes, so that ``fragresults[1][24][5]`` gives the contribution of the 5th fragment orbitals to the 24th beta molecular orbital)
+* ``aoresults``: a three dimensional array with spin, molecular orbital, and atomic orbitals as the axes, so that ``aoresults[1, 46, 1]`` gives the contribution of the 1st atomic orbital to the 46th alpha/restricted molecular orbital,
+* ``fragresults``: a three dimensional array with spin, molecular orbital, and atoms as the axes, so that ``fragresults[1, 24, 5]`` gives the contribution of the 5th fragment orbitals to the 24th beta molecular orbital)
 * ``fragcharges``: a vector with the number of (partial) electrons in each fragment, so that ``fragcharges[3]`` gives the number of electrons in the 3rd fragment.
 
 # Löwdin Population Analysis
@@ -33,8 +33,8 @@ julia> using Cclib
 julia> aoresults, fragresults, fragcharges = lpa("./Trp_polar.fchk")
 ```
 
-* ``aoresults``: a three dimensional array with spin, molecular orbital, and atomic orbitals as the axes, so that ``aoresults[1][46][1]`` gives the contribution of the 1st atomic orbital to the 46th alpha/restricted molecular orbital,
-* ``fragresults``: a three dimensional array with spin, molecular orbital, and atoms as the axes, so that ``fragresults[1][24][5]`` gives the contribution of the 5th fragment orbitals to the 24th beta molecular orbital)
+* ``aoresults``: a three dimensional array with spin, molecular orbital, and atomic orbitals as the axes, so that ``aoresults[1, 46, 1]`` gives the contribution of the 1st atomic orbital to the 46th alpha/restricted molecular orbital,
+* ``fragresults``: a three dimensional array with spin, molecular orbital, and atoms as the axes, so that ``fragresults[1, 24, 5]`` gives the contribution of the 5th fragment orbitals to the 24th beta molecular orbital)
 * ``fragcharges``: a vector with the number of (partial) electrons in each fragment, so that ``fragcharges[3]`` gives the number of electrons in the 3rd fragment.
 
 # Bickelhaupt Population Analysis
@@ -55,8 +55,8 @@ The weights are introduced to replace the somewhat arbitrary partitioning of off
 julia> using Cclib
 julia> aoresults, fragresults, fragcharges = bpa("./Trp_polar.fchk")
 ```
-* ``aoresults``: a three dimensional array with spin, molecular orbital, and atomic orbitals as the axes, so that ``aoresults[1][46][1]`` gives the contribution of the 1st atomic orbital to the 46th alpha/restricted molecular orbital,
-* ``fragresults``: a three dimensional array with spin, molecular orbital, and atoms as the axes, so that ``fragresults[1][24][5]`` gives the contribution of the 5th fragment orbitals to the 24th beta molecular orbital)
+* ``aoresults``: a three dimensional array with spin, molecular orbital, and atomic orbitals as the axes, so that ``aoresults[1, 46, 1]`` gives the contribution of the 1st atomic orbital to the 46th alpha/restricted molecular orbital,
+* ``fragresults``: a three dimensional array with spin, molecular orbital, and atoms as the axes, so that ``fragresults[1, 24, 5]`` gives the contribution of the 5th fragment orbitals to the 24th beta molecular orbital)
 * ``fragcharges``: a vector with the number of (partial) electrons in each fragment, so that ``fragcharges[3]`` gives the number of electrons in the 3rd fragment.
 
 # Density Matrix calculation
