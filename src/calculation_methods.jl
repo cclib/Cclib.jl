@@ -124,7 +124,6 @@ function density(file::String)
     return pyconvert(Array{Float64}, mol.__dict__["density"])
 end
 
-#ToDo: check output dimensions?
 """
     mbo(file::String)
 
@@ -142,7 +141,6 @@ function mbo(file::String)
     return pyconvert(Array{Float64}, mol.__dict__["fragresults"])
 end
 
-#TODO Figure out the dimensions
 """
     cda(file::String)
 
