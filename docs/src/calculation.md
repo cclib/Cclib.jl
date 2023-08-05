@@ -44,7 +44,7 @@ The contribution of the a-th atomic orbital to the i-th molecular orbital in thi
 
 $$\Phi_{ai,\alpha} = \sum_b w_{ab,\alpha} c_{ai,\alpha} c_{bi,\alpha} S_{ab}$$
 
-where the weights :math:`w_{ab}` that are applied on the Mulliken atomic orbital contributions are defined as following when the coefficients of the molecular orbitals are substituted into equation 11 in the original article.
+where the weights $w_{ab}$ that are applied on the Mulliken atomic orbital contributions are defined as following when the coefficients of the molecular orbitals are substituted into equation 11 in the original article.
 
 $$w_{ab,\alpha} = 2 \frac{\sum_k c_{ak,\alpha}^2}{\sum_i c_{ai,\alpha}^2 + \sum_j c_{bj,\alpha}^2}$$
 
