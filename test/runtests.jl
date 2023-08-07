@@ -45,14 +45,14 @@ using AtomsBase
     pop_funcs = [cspa, mpa, lpa, bpa]
     for func in pop_funcs
         aoresults, fragresults, fragcharges = func(test_calc_file)
-        @test size(aoresults) == (1, 87, 87)
         @test typeof(aoresults) == Array{Float64, 3}
+        @test size(aoresults) == (1, 87, 87)
 
-        @test size(fragresults) == (1, 87, 27)
         @test typeof(fragresults) == Array{Float64, 3}
+        @test size(fragresults) == (1, 87, 27)
 
-        @test size(fragcharges) == (27,)
         @test typeof(fragcharges) == Array{Float64, 1}
+        @test size(fragcharges) == (27,)
     end
 
     test_density = density(test_calc_file)
@@ -70,14 +70,14 @@ using AtomsBase
         "./data/calculation_methods/cda/CO.log"
         )
     donations, bdonations, repulsions = cda(test_attrs...)
-    @test size(donations) == (1, 51)
     @test typeof(donations) == Matrix{Float64}
+    @test size(donations) == (1, 51)
 
-    @test size(bdonations) == (1, 51)
     @test typeof(bdonations) == Matrix{Float64}
+    @test size(bdonations) == (1, 51)
 
-    @test size(repulsions) == (1, 51)
     @test typeof(repulsions) == Matrix{Float64}
+    @test size(repulsions) == (1, 51)
 
 
 end

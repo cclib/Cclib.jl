@@ -177,7 +177,7 @@ end
 # # returns
 # tuple (donations, backdonations, repulsions)
 # """
-# function bader(file::string, vol::vector{vector{float64}})
+# function bader(file::String, vol::Vector{Vector{Float64}})
 #     data = cclib[].io.ccread(file)
 #     vol = pytuple(pytuple(i) for i in vol)
 #     vol = cclib[].method.volume(vol...)
