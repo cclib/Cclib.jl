@@ -85,5 +85,3 @@ julia> donations, bdonations, repulsions = cda("BH3CO-sp.log", "BH3.log", "CO.lo
 ```
 Returns donations, bdonations (back donations), and repulsions attributes.
 These attributes are simply lists of 1-dimensional arrays corresponding to the restricted or alpha/beta molecular orbitals of the entire molecule.
-
-<!-- # Bader’s QTAIM -->
