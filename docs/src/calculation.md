@@ -4,7 +4,9 @@ Cclib also allows to further analyse calculation ouputs.
 
 # C squared population analysis (CSPA)
 **CSPA** can be used to determine and interpret the electron density of a molecule. The contribution of the a-th atomic orbital to the i-th molecular orbital can be written in terms of the molecular orbital coefficients:
+
 $$\Phi_{ai} = \frac{c^2_{ai}}{\sum_k c^2_{ki}}$$
+
 ```Julia
 # Example calculation files can be found in the test folder of the main branch.
 julia> using Cclib
@@ -17,7 +19,9 @@ julia> aoresults, fragresults, fragcharges = cspa("./Trp_polar.fchk")
 
 # Mulliken population analysis (MPA)
 MPA can be used to determine and interpret the electron density of a molecule. The contribution of the a-th atomic orbital to the i-th molecular orbital in this method is written in terms of the molecular orbital coefficients, c, and the overlap matrix, S:
+
 $$\Phi_{ai} = \sum_b c_{ai} c_{bi} S_{ab}$$
+
 ```Julia
 julia> using Cclib
 julia> aoresults, fragresults, fragcharges = mpa("./Trp_polar.fchk")
@@ -81,5 +85,3 @@ julia> donations, bdonations, repulsions = cda("BH3CO-sp.log", "BH3.log", "CO.lo
 ```
 Returns donations, bdonations (back donations), and repulsions attributes.
 These attributes are simply lists of 1-dimensional arrays corresponding to the restricted or alpha/beta molecular orbitals of the entire molecule.
-
-<!-- # Bader’s QTAIM -->
