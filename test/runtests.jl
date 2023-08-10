@@ -7,6 +7,10 @@ using AtomsBase
 
 @testset "Cclib.jl" begin
     test_file = "./data/uracil_two.xyz"
+
+    #
+    # Test parsing and reading
+    #
     test_ccdata = ccread(test_file)
 
     # Check that input is read correctly
@@ -23,11 +27,57 @@ using AtomsBase
     @test isnothing(ccread("./data/invalid_file.txt"))
     @test isnothing(ccread("./data/"))
 
+    #
     # Check AtomsBase Integration
+    #
     test_atom_objects = get_atom_objects(test_file)
     @test atomic_number(test_atom_objects[1]) == 7
     @test atomic_symbol(test_atom_objects[1]) == :N
     @test atomic_number(test_atom_objects[6]) == 6
     @test atomic_symbol(test_atom_objects[6]) == :C
+
+    #
+    # Check calculation methods
+    #
+
+    # populations, density, and mbo
+    test_calc_file = "./data/Trp_polar.fchk"
+    pop_funcs = [cspa, mpa, lpa, bpa]
+    for func in pop_funcs
+        aoresults, fragresults, fragcharges = func(test_calc_file)
+        @test typeof(aoresults) == Array{Float64, 3}
+        @test size(aoresults) == (1, 87, 87)
+
+        @test typeof(fragresults) == Array{Float64, 3}
+        @test size(fragresults) == (1, 87, 27)
+
+        @test typeof(fragcharges) == Array{Float64, 1}
+        @test size(fragcharges) == (27,)
+    end
+
+    test_density = density(test_calc_file)
+    @test size(test_density) == (1, 87, 87)
+    @test typeof(test_density) == Array{Float64, 3}
+
+    test_mbo = mbo(test_calc_file)
+    @test size(test_mbo) == (1, 27, 27)
+    @test typeof(test_mbo) == Array{Float64, 3}
+
+    # cda
+    test_attrs = (
+        "./data/calculation_methods/cda/BH3CO-sp.log",
+        "./data/calculation_methods/cda/BH3.log",
+        "./data/calculation_methods/cda/CO.log"
+        )
+    donations, bdonations, repulsions = cda(test_attrs...)
+    @test typeof(donations) == Matrix{Float64}
+    @test size(donations) == (1, 51)
+
+    @test typeof(bdonations) == Matrix{Float64}
+    @test size(bdonations) == (1, 51)
+
+    @test typeof(repulsions) == Matrix{Float64}
+    @test size(repulsions) == (1, 51)
+
 
 end

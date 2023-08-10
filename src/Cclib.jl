@@ -7,6 +7,7 @@ using UnitfulAtomic
 using Logging
 
 include("config.jl")
+include("calculation_methods.jl")
 include("functions.jl")
 include("ab_integration.jl")
 
