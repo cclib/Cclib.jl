@@ -100,8 +100,7 @@ KeySet for a Dict{String, Any} with 4 entries. Keys:
 function ccread(file::String)
     try
         if !isfile(file)
-            @error "$(file) is not file"
-            return nothing
+            throw(ArgumentError("$(file) is not a file"))
         end
         data = get_data(file)
         return data

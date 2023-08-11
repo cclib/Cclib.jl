@@ -7,11 +7,25 @@ using AtomsBase
 
 @testset "Cclib.jl" begin
     test_file = "./data/uracil_two.xyz"
+    test_ccdata = ccread(test_file)
+    test_geometry = """
+    7\t5.42432\t3.24732\t-0.9432
+    6\t4.08846\t3.26356\t-0.64127
+    1\t6.05396\t3.354\t-0.15563
+    8\t3.68445\t3.39863\t0.50851
+    7\t3.24195\t3.11963\t-1.70419
+    6\t3.62987\t2.96568\t-3.0054
+    8\t2.83542\t2.83961\t-3.9297
+    6\t5.0864\t2.95832\t-3.25044
+    6\t5.91213\t3.09904\t-2.21101
+    1\t2.2534\t3.12801\t-1.51035
+    1\t5.42415\t2.83814\t-4.27067
+    1\t6.9915\t3.10206\t-2.32366
+    """
 
     #
     # Test parsing and reading
     #
-    test_ccdata = ccread(test_file)
 
     # Check that input is read correctly
     @test test_ccdata["natom"] == 12
@@ -24,12 +38,18 @@ using AtomsBase
                                         -0.9432 -0.64127 -0.15563 0.50851 -1.70419 -3.0054 -3.9297 -3.25044 -2.21101 -1.51035 -4.27067 -2.32366]
 
     # Check that it handles unsupported files correctly
-    @test isnothing(ccread("./data/invalid_file.txt"))
-    @test isnothing(ccread("./data/"))
+    @test_throws ArgumentError ccread("./data/invalid_file.txt")
+    @test_throws ArgumentError ccread("./data/")
+
+    # Check that it writes .xyz correctly
+    @test writeXYZ(test_file) == test_geometry
+    @test writeXYZ(test_ccdata) == test_geometry
+
 
     #
     # Check AtomsBase Integration
     #
+
     test_atom_objects = get_atom_objects(test_file)
     @test atomic_number(test_atom_objects[1]) == 7
     @test atomic_symbol(test_atom_objects[1]) == :N
