@@ -20,10 +20,33 @@ function get_data(file)
     return datadict
 end
 
-function writeXYZ(mol::Dict)
+"""
+    writeXYZ(mol::Dict)
+
+    Write an XYZ file to a string using atom numbers
+    and atom geometries that were loaded into a Dict
+    returned by `ccread` function
+
+# Arguments
+- `mol::Dict`: Dictionary that was returned by `ccread` function
+- `geomIdx::Union{Int64, Nothing}`: Geometry set index. This is in place \
+   for cases when there is more than geometry available. Be default, it will \
+   it take the last read geometry.
+
+# Returns
+An .xyz string containing atom numbers and geometries
+"""
+function writeXYZ(mol::Dict, geomIdx::Union{Int64, Nothing}=nothing)
     temp = IOBuffer()
-    coords = mol["atomcoords"] |>
-                x -> x[size(x)[1], :, :]
+
+    if isnothing(geomIdx)
+        coords = mol["atomcoords"] |>
+                    x -> x[size(x)[1], :, :]
+    else
+        coords = mol["atomcoords"] |>
+                    x -> x[geomIdx, :, :]
+    end
+
     atoms = mol["atomnos"] |>
                 x -> string.(x)
     xyzfile = hcat(atoms, coords)
@@ -31,8 +54,23 @@ function writeXYZ(mol::Dict)
     return String(take!(temp))
 end
 
-function writeXYZ(file::String)
-    return writeXYZ(ccread(file))
+"""
+    writeXYZ(file::String)
+
+    Write an XYZ file to a string using atom numbers
+    and atom geometries read from a Cclib-supported file format
+
+# Arguments
+- `file::String`: Cclib-supported file format
+- `geomIdx::Union{Int64, Nothing}`: Geometry set index. This is in place \
+   for cases when there is more than geometry available. Be default, it will \
+   it take the last read geometry.
+
+# Returns
+An .xyz string containing atom numbers and geometries
+"""
+function writeXYZ(file::String, geomIdx::Union{Int64, Nothing}=nothing)
+    return writeXYZ(ccread(file), geomIdx)
 end
 
 """
