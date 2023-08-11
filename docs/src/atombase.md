@@ -77,11 +77,13 @@ Refer to InteratomicPotentials.jl documentation for more details.
 
 # Fermi.jl
 
-We can use information loaded using Cclib and use it as input for [Fermi.jl](https://github.com/FermiQC/Fermi.jl) calculations:
+We can use information loaded using Cclib and use it for [Fermi.jl](https://github.com/FermiQC/Fermi.jl) calculations, which accept atom numbers and XYZ coordinates as input. The latter is accessible using Cclib's `getXYZ` function.
+
+Note that files may contain more than one geometry, in which case the index of the geometry can be specified by passing `geomIdx` argument to `getXYZ`. Be default, `getXYZ` will use the last read geometry.
 ```Julia
 julia> using Cclib
 julia> using Fermi # make sure to install using "add Fermi#master"
-julia> xyzfile = writeXYZ("./test/data/Trp_polar.fchk")
+julia> xyzfile = getXYZ("./test/data/Trp_polar.fchk")
 julia> mol = Molecule(molstring=xyzfile)
 julia> @set basis sto-3g
 julia> @energy rhf # this line should produce something similar to what is below.

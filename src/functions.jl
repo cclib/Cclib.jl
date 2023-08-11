@@ -2,7 +2,7 @@
 # General functions for parsing chemical outputs
 #
 export ccread
-export writeXYZ
+export getXYZ
 
 function pyccread(file)
     data = cclib[].io.ccread(file)
@@ -21,9 +21,9 @@ function get_data(file)
 end
 
 """
-    writeXYZ(mol::Dict)
+    getXYZ(mol::Dict)
 
-    Write an XYZ file to a string using atom numbers
+    Write XYZ coordinates to a string using atom numbers
     and atom geometries that were loaded into a Dict
     returned by `ccread` function
 
@@ -36,7 +36,7 @@ end
 # Returns
 An .xyz string containing atom numbers and geometries
 """
-function writeXYZ(mol::Dict, geomIdx::Union{Int64, Nothing}=nothing)
+function getXYZ(mol::Dict, geomIdx::Union{Int64, Nothing}=nothing)
     temp = IOBuffer()
 
     if isnothing(geomIdx)
@@ -55,9 +55,9 @@ function writeXYZ(mol::Dict, geomIdx::Union{Int64, Nothing}=nothing)
 end
 
 """
-    writeXYZ(file::String)
+    getXYZ(file::String)
 
-    Write an XYZ file to a string using atom numbers
+    Write XYZ coordinatores to a string using atom numbers
     and atom geometries read from a Cclib-supported file format
 
 # Arguments
@@ -69,8 +69,8 @@ end
 # Returns
 An .xyz string containing atom numbers and geometries
 """
-function writeXYZ(file::String, geomIdx::Union{Int64, Nothing}=nothing)
-    return writeXYZ(ccread(file), geomIdx)
+function getXYZ(file::String, geomIdx::Union{Int64, Nothing}=nothing)
+    return getXYZ(ccread(file), geomIdx)
 end
 
 """

@@ -42,8 +42,8 @@ using AtomsBase
     @test_throws ArgumentError ccread("./data/")
 
     # Check that it writes .xyz correctly
-    @test writeXYZ(test_file) == test_geometry
-    @test writeXYZ(test_ccdata) == test_geometry
+    @test getXYZ(test_file) == test_geometry
+    @test getXYZ(test_ccdata) == test_geometry
 
 
     #
