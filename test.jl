@@ -2,7 +2,7 @@ using Cclib
 using DelimitedFiles
 using Fermi
 
-mol = ccread("./test/data/Trp_polar.fchk")
+mol = ccread("./test/data/uracil_two.xyz")
 atoms = mol["atomnos"] |>
             x -> string.(x)
 coords = mol["atomcoords"][1, :, :]

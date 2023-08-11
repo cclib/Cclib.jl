@@ -1,8 +1,8 @@
 #
 # General functions for parsing chemical outputs
 #
-
 export ccread
+export writeXYZ
 
 function pyccread(file)
     data = cclib[].io.ccread(file)
@@ -18,6 +18,21 @@ function get_data(file)
         datadict[key] = pyconvert(type, value)
     end
     return datadict
+end
+
+function writeXYZ(mol::Dict)
+    temp = IOBuffer()
+    coords = mol["atomcoords"] |>
+                x -> x[size(x)[1], :, :]
+    atoms = mol["atomnos"] |>
+                x -> string.(x)
+    xyzfile = hcat(atoms, coords)
+    writedlm(temp, xyzfile)
+    return String(take!(temp))
+end
+
+function writeXYZ(file::String)
+    return writeXYZ(ccread(file))
 end
 
 """
@@ -54,8 +69,9 @@ function ccread(file::String)
         return data
     catch e
         if isa(e, PythonCall.PyException)
-            @error "Unsupported file format"
-            return nothing
+            throw(ArgumentError("Unsupported file format"))
+        else
+            throw(ArgumentError("Something went wrong"))
         end
     end
 end
