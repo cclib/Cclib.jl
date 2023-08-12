@@ -1,8 +1,8 @@
 #
 # General functions for parsing chemical outputs
 #
-
 export ccread
+export getXYZ
 
 function pyccread(file)
     data = cclib[].io.ccread(file)
@@ -18,6 +18,59 @@ function get_data(file)
         datadict[key] = pyconvert(type, value)
     end
     return datadict
+end
+
+"""
+    getXYZ(mol::Dict)
+
+    Write XYZ coordinates to a string using atom numbers
+    and atom geometries that were loaded into a Dict
+    returned by `ccread` function
+
+# Arguments
+- `mol::Dict`: Dictionary that was returned by `ccread` function
+- `geomIdx::Union{Int64, Nothing}`: Geometry set index. This is in place \
+   for cases when there is more than geometry available. Be default, it will \
+   it take the last read geometry.
+
+# Returns
+An .xyz string containing atom numbers and geometries
+"""
+function getXYZ(mol::Dict, geomIdx::Union{Int64, Nothing}=nothing)
+    temp = IOBuffer()
+
+    if isnothing(geomIdx)
+        coords = mol["atomcoords"] |>
+                    x -> x[size(x)[1], :, :]
+    else
+        coords = mol["atomcoords"] |>
+                    x -> x[geomIdx, :, :]
+    end
+
+    atoms = mol["atomnos"] |>
+                x -> string.(x)
+    xyzfile = hcat(atoms, coords)
+    writedlm(temp, xyzfile)
+    return String(take!(temp))
+end
+
+"""
+    getXYZ(file::String)
+
+    Write XYZ coordinatores to a string using atom numbers
+    and atom geometries read from a Cclib-supported file format
+
+# Arguments
+- `file::String`: Cclib-supported file format
+- `geomIdx::Union{Int64, Nothing}`: Geometry set index. This is in place \
+   for cases when there is more than geometry available. Be default, it will \
+   it take the last read geometry.
+
+# Returns
+An .xyz string containing atom numbers and geometries
+"""
+function getXYZ(file::String, geomIdx::Union{Int64, Nothing}=nothing)
+    return getXYZ(ccread(file), geomIdx)
 end
 
 """
@@ -47,15 +100,15 @@ KeySet for a Dict{String, Any} with 4 entries. Keys:
 function ccread(file::String)
     try
         if !isfile(file)
-            @error "$(file) is not file"
-            return nothing
+            throw(ArgumentError("$(file) is not a file"))
         end
         data = get_data(file)
         return data
     catch e
         if isa(e, PythonCall.PyException)
-            @error "Unsupported file format"
-            return nothing
+            throw(ArgumentError("Unsupported file format"))
+        else
+            throw(ArgumentError("Something went wrong"))
         end
     end
 end
