@@ -1,7 +1,8 @@
-[![license](http://img.shields.io/badge/license-BSD-blue.svg?style=flat)](https://github.com/cclib/cclib/blob/master/LICENSE)
 [![Stable](https://img.shields.io/badge/docs-stable-blue.svg)](https://cclib.github.io/Cclib.jl/dev/)
 [![Latest release](https://img.shields.io/github/release/cclib/Cclib.jl.svg)](https://github.com/cclib/Cclib.jl/releases/latest)
+[![CI](https://github.com/cclib/Cclib.jl/actions/workflows/CI.yml/badge.svg?branch=main)](https://github.com/cclib/Cclib.jl/actions/workflows/CI.yml)
 [![Cclib Downloads](https://shields.io/endpoint?url=https://pkgs.genieframework.com/api/v1/badge/Cclib)](https://pkgs.genieframework.com?packages=Cclib)
+[![license](http://img.shields.io/badge/license-BSD-blue.svg?style=flat)](https://github.com/cclib/cclib/blob/master/LICENSE)
 
 # Cclib.jl
 
