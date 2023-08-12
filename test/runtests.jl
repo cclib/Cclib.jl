@@ -44,7 +44,8 @@ using AtomsBase
     # Check that it writes .xyz correctly
     @test getXYZ(test_file) == test_geometry
     @test getXYZ(test_ccdata) == test_geometry
-
+    @test_throws BoundsError getXYZ(test_file, 3)
+    @test_throws BoundsError getXYZ(test_geometry, 3)
 
     #
     # Check AtomsBase Integration
