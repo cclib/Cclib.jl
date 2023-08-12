@@ -40,11 +40,11 @@ function getXYZ(mol::Dict, geomIdx::Union{Int64, Nothing}=nothing)
     temp = IOBuffer()
 
     if isnothing(geomIdx)
-        coords = mol["atomcoords"]
-        coords = coords[size(coords)[1], :, :]
+        coords = mol["atomcoords"] |>
+                    x -> x[size(x)[1], :, :]
     else
-        coords = mol["atomcoords"]
-        coords = coords[geomIdx, :, :]
+        coords = mol["atomcoords"] |>
+                    x -> x[geomIdx, :, :]
     end
 
     atoms = mol["atomnos"] |>
