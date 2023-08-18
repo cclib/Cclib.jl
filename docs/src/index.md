@@ -4,7 +4,7 @@
 
 # Features
 
-- Parsing outputs of quantum chemistry programs, such as such as Gaussian, GAMESS, and PSI4.
+- Parsing outputs from 15 different programs: ADF, DALTON, Firefly, GAMESS (US), GAMESS-UK, Gaussian, Jaguar, Molpro, MOLCAS, MOPAC, NWChem, ORCA, Psi, QChem and Turbomole.
 
 - Further analysis of calculation outputs, such as population analysis.
 
