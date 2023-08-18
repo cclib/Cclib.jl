@@ -16,8 +16,8 @@ makedocs(;
     pages=[
         "Home" => "index.md",
         "How to parse files" => "io.md",
-        "Additional Analyses" => "calculation.md",
-        "AtomsBase Integration" => "interop.md"
+        "Additional analyses" => "calculation.md",
+        "Interoperability with other tools" => "interop.md"
     ],
 )
 
