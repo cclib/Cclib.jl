@@ -63,7 +63,7 @@ end
 # Arguments
 - `file::String`: Cclib-supported file format
 - `geomIdx::Union{Int64, Nothing}`: Geometry set index. This is in place \
-   for cases when there is more than one geometry available. Be default, it will take \
+   for cases when there is more than one geometry available. By default, it will take \
    the last read geometry.
 
 # Returns
