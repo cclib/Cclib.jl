@@ -4,7 +4,7 @@
 
 # Features
 
-- Parsing outputs from 15 different programs: ADF, DALTON, Firefly, GAMESS (US), GAMESS-UK, Gaussian, Jaguar, Molpro, MOLCAS, MOPAC, NWChem, ORCA, Psi, NBO, QChem and Turbomole.
+- Parsing outputs from 15 different programs: ADF, DALTON, Firefly, GAMESS (US), GAMESS-UK, Gaussian, Jaguar, Molpro, MOLCAS, MOPAC, NWChem, ORCA, Psi4, NBO, QChem and Turbomole.
 
 - Further analysis of calculation outputs, such as population analysis.
 
