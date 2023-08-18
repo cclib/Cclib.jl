@@ -30,8 +30,8 @@ end
 # Arguments
 - `mol::Dict`: Dictionary that was returned by `ccread` function
 - `geomIdx::Union{Int64, Nothing}`: Geometry set index. This is in place \
-   for cases when there is more than geometry available. Be default, it will \
-   it take the last read geometry.
+   for cases when there is more than one geometry available. Be default, it will take \
+   the last read geometry.
 
 # Returns
 An .xyz string containing atom numbers and geometries
@@ -57,14 +57,14 @@ end
 """
     getXYZ(file::String)
 
-    Write XYZ coordinatores to a string using atom numbers
+    Write XYZ coordinates to a string using atom numbers
     and atom geometries read from a Cclib-supported file format
 
 # Arguments
 - `file::String`: Cclib-supported file format
 - `geomIdx::Union{Int64, Nothing}`: Geometry set index. This is in place \
-   for cases when there is more than geometry available. Be default, it will \
-   it take the last read geometry.
+   for cases when there is more than one geometry available. By default, it will take \
+   the last read geometry.
 
 # Returns
 An .xyz string containing atom numbers and geometries

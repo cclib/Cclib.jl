@@ -23,4 +23,4 @@ Accessing the data is identical to how one would access data in a dictionary:
 julia> mol["natom"]
 12
 ```
-Note that files may contain more than one geometry, in which case the index of the geometry can be specified by passing `geomIdx` argument. Be default, writeXYZ will use the last read geometry.
+Note that files may contain more than one geometry, in which case the index of the geometry can be specified by passing `geomIdx` argument. Be default, `writeXYZ` will use the last read geometry.
