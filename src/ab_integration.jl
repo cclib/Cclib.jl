@@ -2,6 +2,7 @@
 # Functions for AtomsBase integration https://github.com/JuliaMolSim/AtomsBase.jl/tree/master
 #
 export get_atom_objects
+export make_flexible_system
 
 """
     get_atom_objects(mol::Dict)
@@ -38,4 +39,22 @@ A list of AtomsBase atom objects
 """
 function get_atom_objects(mol::String)
     return get_atom_objects(ccread(mol))
+end
+
+function make_flexible_system(mol::Dict, args...; kwargs...)
+    atoms = get_atom_objects(mol)
+    return FlexibleSystem(atoms, args...; kwargs...)
+end
+
+function make_flexible_system(mol::String, args...; kwargs...)
+    return(make_flexible_system(ccread(mol), args...; kwargs...))
+end
+
+function make_isolated_system(mol::Dict; kwargs...)
+    atoms = get_atom_objects(mol)
+    return isolated_system(atoms; kwargs...)
+end
+
+function make_isolated_system(mol::String; kwargs...)
+    return make_isolated_system(ccread(mol); kwargs...)
 end
