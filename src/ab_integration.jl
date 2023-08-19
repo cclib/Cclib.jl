@@ -3,6 +3,7 @@
 #
 export get_atom_objects
 export make_flexible_system
+export make_isolated_system
 
 """
     get_atom_objects(mol::Dict)
