@@ -10,7 +10,7 @@ For a detailed overview, or if you want to know how AtomsBase.jl operates behind
 
 ## Creating AtomsBase Systems
 We can load information contained in a Cclib.jl-supported file into a system by using the following functions:
-- `make_flexible_system` - for creating AtomsBase `FlexibleSystem`
+- `make_flexible_system` - for creating an AtomsBase `FlexibleSystem`
 
 ```Julia
 # Input file can be found in the in the repo under "test" folder
@@ -40,7 +40,7 @@ FlexibleSystem(H₂O, periodic = TTT):
 
 ```
 
-- `make_isolated_system` - for creating AtomsBase `isolated_system`
+- `make_isolated_system` - for creating an AtomsBase `isolated_system`
 
 ```Julia
 julia> using Cclib

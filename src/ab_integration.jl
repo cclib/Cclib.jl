@@ -46,7 +46,7 @@ end
 """
     make_flexible_system(mol::Dict)
 
-Create an AtomsBase FlexiblySystem.
+Create an AtomsBase FlexibleSystem.
 
 # Arguments
 - `mol::Dict`: Dictionary that was returned by `ccread` function
