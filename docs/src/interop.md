@@ -4,7 +4,7 @@
 
 Cclib.jl provides interoperability with [AtomsBase.jl](https://github.com/JuliaMolSim/AtomsBase.jl) by allowing to create AtomsBase systems.
 
-The documentaiton below provides some essential functionality such as creating and editing AtomsBase.jl systems.
+The documentaiton below provides some essential functionality, such as creating and editing AtomsBase.jl systems.
 
 For a detailed overview, or if you want to know how AtomsBase.jl operates behind the scenes, refer to its official documentation.
 
@@ -116,7 +116,7 @@ julia> using DFTK
 
 julia> box = [[3.0, 0.0, 0.0], [0.0, 3.0, 0.0], [0.0, 0.0, 3.0]]u"Å"
 julia> boundary_conditions = [Periodic(), Periodic(), Periodic()]
-julia> system = make_flexible_system("./water_mp2.out");
+julia> system = make_flexible_system("./water_mp2.out", box, boundary_conditions);
 ```
 
 We can now perform calculate various properties of the system:
