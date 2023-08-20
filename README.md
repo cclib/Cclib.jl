@@ -15,7 +15,7 @@ Extented Julia bindings to [cclib](https://github.com/cclib/cclib) library.
 - Further analysis of calculation outputs, such as population analysis.
 
 - Integration with [AtomsBase.jl](https://github.com/JuliaMolSim/AtomsBase.jl) - an interface for atomic geometries.
-    - By extension, provides interoperability with libraries that use AtomsBase.jl, such as [Molly.jl](https://github.com/JuliaMolSim/Molly.jl) and [InteratomicPotentials.jl](https://github.com/cesmix-mit/InteratomicPotentials.jl).
+    - By extension, provides interoperability with libraries that use AtomsBase.jl, such as [DFTK.jl](https://github.com/JuliaMolSim/DFTK.jl), [Molly.jl](https://github.com/JuliaMolSim/Molly.jl) and [InteratomicPotentials.jl](https://github.com/cesmix-mit/InteratomicPotentials.jl).
 - Integration with [Fermi.jl](https://github.com/FermiQC/Fermi.jl) - quantum chemistry framework written in Julia.
 
 

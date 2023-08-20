@@ -1,5 +1,6 @@
 using Cclib
 using PythonCall
+using Unitful
 using Test
 using AtomsBase
 
@@ -8,6 +9,10 @@ using AtomsBase
 @testset "Cclib.jl" begin
     test_file = "./data/uracil_two.xyz"
     test_ccdata = ccread(test_file)
+
+    test_system_file = "./data/calculation_methods/bader/water_mp2.out"
+    test_system_ccdata = ccread(test_system_file)
+
     test_geometry = """
     7\t5.42432\t3.24732\t-0.9432
     6\t4.08846\t3.26356\t-0.64127
@@ -51,11 +56,22 @@ using AtomsBase
     # Check AtomsBase Integration
     #
 
+    # test atom objects
     test_atom_objects = get_atom_objects(test_file)
     @test atomic_number(test_atom_objects[1]) == 7
     @test atomic_symbol(test_atom_objects[1]) == :N
     @test atomic_number(test_atom_objects[6]) == 6
     @test atomic_symbol(test_atom_objects[6]) == :C
+
+    # test systems
+    test_box = [[3.0, 0.0, 0.0], [0.0, 3.0, 0.0], [0.0, 0.0, 3.0]]u"Å"
+    test_boundary_conditions = [Periodic(), Periodic(), Periodic()]
+    test_flexible_system = make_flexible_system(test_system_file, test_box, test_boundary_conditions)
+    test_isolated_system = make_isolated_system(test_system_file)
+
+    @test atomic_number(test_flexible_system) == [8, 1, 1]
+    @test atomic_number(test_isolated_system) == [8, 1, 1]
+    @test update_system(test_isolated_system; prop=5)[:prop] == 5
 
     #
     # Check calculation methods
