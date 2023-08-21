@@ -21,7 +21,4 @@ makedocs(;
     ],
 )
 
-deploydocs(;
-    repo="https://github.com/cclib/Cclib.jl",
-    devbranch="main",
-)
+deploydocs(repo="https://github.com/cclib/Cclib.jl.git")
