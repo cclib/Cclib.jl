@@ -1,6 +1,6 @@
 # Interoperability With Other Tools
 
-# AtomsBase.jl
+## AtomsBase.jl
 
 Cclib.jl provides interoperability with [AtomsBase.jl](https://github.com/JuliaMolSim/AtomsBase.jl) by allowing to create AtomsBase systems.
 
@@ -101,7 +101,7 @@ julia> system[:nbasis]
 7
 ```
 
-# AtomsBase.jl-supported libraries
+#### AtomsBase.jl-supported libraries
 
 We can use data loaded with Cclib.jl to perform calculations using other libraries that use AtomsBase.jl, such as [InteratomicPotentials.jl](https://github.com/cesmix-mit/InteratomicPotentials.jl) or [DFTK.jl](https://github.com/JuliaMolSim/DFTK.jl).
 
@@ -155,7 +155,7 @@ n     Energy            log10(ΔE)   log10(Δρ)   Diag   Δtime
 For a full list of tools that support AtomsBase.jl, refer to its [official
 documentation](https://github.com/JuliaMolSim/AtomsBase.jl).
 
-# Fermi.jl
+## Fermi.jl
 
 We can use information loaded using Cclib and use it for [Fermi.jl](https://github.com/FermiQC/Fermi.jl) calculations, which accept atom numbers and XYZ coordinates as input. The latter is accessible using Cclib's `getXYZ` function.
 
