@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>Interoperability with other tools · Cclib.jl</title><script data-outdated-warner src="../assets/warner.js"></script><link rel="canonical" href="https://github.com/cclib/Cclib.jl/interop/"/><link href="https://cdnjs.cloudflare.com/ajax/libs/lato-font/3.0.0/css/lato-font.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/juliamono/0.045/juliamono.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/fontawesome.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/solid.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/brands.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.24/katex.min.css" rel="stylesheet" type="text/css"/><script>documenterBaseURL=".."</script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" data-main="../assets/documenter.js"></script><script src="../siteinfo.js"></script><script src="../../versions.js"></script><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/documenter-dark.css" data-theme-name="documenter-dark" data-theme-primary-dark/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/documenter-light.css" data-theme-name="documenter-light" data-theme-primary/><script src="../assets/themeswap.js"></script></head><body><div id="documenter"><nav class="docs-sidebar"><div class="docs-package-name"><span class="docs-autofit"><a href="../">Cclib.jl</a></span></div><form class="docs-search" action="../search/"><input class="docs-search-query" id="documenter-search-query" name="q" type="text" placeholder="Search docs"/></form><ul class="docs-menu"><li><a class="tocitem" href="../">Home</a></li><li><a class="tocitem" href="../io/">How to parse files</a></li><li><a class="tocitem" href="../calculation/">Additional analyses</a></li><li class="is-active"><a class="tocitem" href>Interoperability with other tools</a><ul class="internal"><li><a class="tocitem" href="#AtomsBase.jl"><span>AtomsBase.jl</span></a></li><li><a class="tocitem" href="#Fermi.jl"><span>Fermi.jl</span></a></li></ul></li></ul><div class="docs-version-selector field has-addons"><div class="control"><span class="docs-label button is-static is-size-7">Version</span></div><div class="docs-selector control is-expanded"><div class="select is-fullwidth is-size-7"><select id="documenter-version-selector"></select></div></div></div></nav><div class="docs-main"><header class="docs-navbar"><nav class="breadcrumb"><ul class="is-hidden-mobile"><li class="is-active"><a href>Interoperability with other tools</a></li></ul><ul class="is-hidden-tablet"><li class="is-active"><a href>Interoperability with other tools</a></li></ul></nav><div class="docs-right"><a class="docs-edit-link" href="https://github.com/cclib/Cclib.jl" title="Edit on GitHub"><span class="docs-icon fab"></span><span class="docs-label is-hidden-touch">Edit on GitHub</span></a><a class="docs-settings-button fas fa-cog" id="documenter-settings-button" href="#" title="Settings"></a><a class="docs-sidebar-button fa fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a></div></header><article class="content" id="documenter-page"><h1 id="Interoperability-With-Other-Tools"><a class="docs-heading-anchor" href="#Interoperability-With-Other-Tools">Interoperability With Other Tools</a><a id="Interoperability-With-Other-Tools-1"></a><a class="docs-heading-anchor-permalink" href="#Interoperability-With-Other-Tools" title="Permalink"></a></h1><h2 id="AtomsBase.jl"><a class="docs-heading-anchor" href="#AtomsBase.jl">AtomsBase.jl</a><a id="AtomsBase.jl-1"></a><a class="docs-heading-anchor-permalink" href="#AtomsBase.jl" title="Permalink"></a></h2><p>Cclib.jl provides interoperability with <a href="https://github.com/JuliaMolSim/AtomsBase.jl">AtomsBase.jl</a> by allowing to create AtomsBase systems.</p><p>The documentaiton below provides some essential functionality, such as creating and editing AtomsBase.jl systems.</p><p>For a detailed overview, or if you want to know how AtomsBase.jl operates behind the scenes, refer to its official documentation.</p><h3 id="Creating-AtomsBase-Systems"><a class="docs-heading-anchor" href="#Creating-AtomsBase-Systems">Creating AtomsBase Systems</a><a id="Creating-AtomsBase-Systems-1"></a><a class="docs-heading-anchor-permalink" href="#Creating-AtomsBase-Systems" title="Permalink"></a></h3><p>We can load information contained in a Cclib.jl-supported file into a system by using the following functions:</p><ul><li><code>make_flexible_system</code> - for creating an AtomsBase <code>FlexibleSystem</code></li></ul><pre><code class="language-Julia hljs"># Input file can be found in the in the repo under &quot;test&quot; folder
+julia&gt; using Cclib
+julia&gt; using Unitful
+julia&gt; using AtomsBase
+julia&gt; box = [[3.0, 0.0, 0.0], [0.0, 3.0, 0.0], [0.0, 0.0, 3.0]]u&quot;Å&quot;
+julia&gt; boundary_conditions = [Periodic(), Periodic(), Periodic()]
+julia&gt; system = make_flexible_system(&quot;./water_mp2.out&quot;, box, boundary_conditions)
+
+FlexibleSystem(H₂O, periodic = TTT):
+    bounding_box      : [       3        0        0;
+                                0        3        0;
+                                0        0        3]u&quot;Å&quot;
+
+    Atom(O,  [       0,        0, -0.0666785]u&quot;Å&quot;)
+    Atom(H,  [       0, -0.790649, 0.529118]u&quot;Å&quot;)
+    Atom(H,  [       0, 0.790649, 0.529118]u&quot;Å&quot;)
+
+      .------.
+     /|      |
+    O |      |
+    | |      |
+    |H.------.
+    |H      /
+    *------*
+</code></pre><ul><li><code>make_isolated_system</code> - for creating an AtomsBase <code>isolated_system</code></li></ul><pre><code class="language-Julia hljs">julia&gt; using Cclib
+julia&gt; system = make_isolated_system(&quot;./water_mp2.out&quot;)
+
+FlexibleSystem(H₂O, infinite):
+    Atom(O,  [       0,        0, -0.0666785]u&quot;Å&quot;)
+    Atom(H,  [       0, -0.790649, 0.529118]u&quot;Å&quot;)
+    Atom(H,  [       0, 0.790649, 0.529118]u&quot;Å&quot;)</code></pre><ul><li><code>get_atom_objects</code> - for getting an array of AtomsBase <code>Atom</code> objects in case you need more control.</li></ul><pre><code class="language-Julia hljs">julia&gt; using Cclib
+julia&gt; using AtomsBase
+julia&gt; mol = ccread(&quot;./water_mp2.out&quot;)
+julia&gt; atoms = get_atom_objects(mol)
+julia&gt; atoms[1]
+
+Atom(O, atomic_number = 8, atomic_mass = 15.999 u):
+    position          : [0,0,-0.066678532]u&quot;Å&quot;</code></pre><h3 id="Accessing-System-Properties"><a class="docs-heading-anchor" href="#Accessing-System-Properties">Accessing System Properties</a><a id="Accessing-System-Properties-1"></a><a class="docs-heading-anchor-permalink" href="#Accessing-System-Properties" title="Permalink"></a></h3><p>In case we need to look at what our system contains, we can use regular <code>keys</code> to see available system-level properties and <code>atomkeys</code> to see available atom-level properties</p><pre><code class="language-Julia hljs">julia&gt; using Cclib
+julia&gt; using AtomsBase
+julia&gt; system = make_isolated_system(&quot;./water_mp2.out&quot;)
+
+julia&gt; keys(system)
+(:bounding_box, :boundary_conditions)
+
+julia&gt; atomkeys(system)
+(:position, :velocity, :atomic_symbol, :atomic_number, :atomic_mass)
+
+julia&gt; bounding_box(system)
+ [Inf a₀, 0.0 a₀, 0.0 a₀]
+ [0.0 a₀, Inf a₀, 0.0 a₀]
+ [0.0 a₀, 0.0 a₀, Inf a₀
+
+ julia&gt; atomic_symbol(system)
+ 3-element Vector{Symbol}:
+ :O
+ :H
+ :H</code></pre><h3 id="Updating-and/or-adding-system-properties"><a class="docs-heading-anchor" href="#Updating-and/or-adding-system-properties">Updating and/or adding system properties</a><a id="Updating-and/or-adding-system-properties-1"></a><a class="docs-heading-anchor-permalink" href="#Updating-and/or-adding-system-properties" title="Permalink"></a></h3><p>We can also update and/or add system properties by using <code>update_system</code> function that accepts keywords arguments. Below is an example of adding data that was parsed using <code>ccread</code> to a system.</p><pre><code class="language-Julia hljs">julia&gt; using Cclib
+julia&gt; mol = ccread(&quot;./water_mp2.out&quot;)
+julia&gt; system = make_isolated_system(mol);
+julia&gt; system = update_system(system; nbasis=mol[&quot;nbasis&quot;])
+julia&gt; system[:nbasis]
+7</code></pre><h3 id="AtomsBase.jl-supported-libraries"><a class="docs-heading-anchor" href="#AtomsBase.jl-supported-libraries">AtomsBase.jl-supported libraries</a><a id="AtomsBase.jl-supported-libraries-1"></a><a class="docs-heading-anchor-permalink" href="#AtomsBase.jl-supported-libraries" title="Permalink"></a></h3><p>We can use data loaded with Cclib.jl to perform calculations using other libraries that use AtomsBase.jl, such as <a href="https://github.com/cesmix-mit/InteratomicPotentials.jl">InteratomicPotentials.jl</a> or <a href="https://github.com/JuliaMolSim/DFTK.jl">DFTK.jl</a>.</p><p>Let&#39;s first load some dependencies and make a system</p><pre><code class="language-Julia hljs">julia&gt; using Cclib
+julia&gt; using AtomsBase
+julia&gt; using Unitful
+julia&gt; using UnitfulAtomic
+julia&gt; using InteratomicPotentials
+julia&gt; using DFTK
+
+julia&gt; box = [[3.0, 0.0, 0.0], [0.0, 3.0, 0.0], [0.0, 0.0, 3.0]]u&quot;Å&quot;
+julia&gt; boundary_conditions = [Periodic(), Periodic(), Periodic()]
+julia&gt; system = make_flexible_system(&quot;./water_mp2.out&quot;, box, boundary_conditions);</code></pre><p>We can now perform calculate various properties of the system:</p><ul><li>using <code>InteratomicPotentials.jl</code></li></ul><pre><code class="language-Julia hljs">julia&gt; ϵ = 1.0 * 1u&quot;eV&quot;
+julia&gt; σ = 0.25 * 1u&quot;Å&quot;
+julia&gt; rcutoff  = 2.25 * 1u&quot;Å&quot;
+julia&gt; lj = LennardJones(ϵ, σ, rcutoff, [:N, :C, :O, :H])
+julia&gt; potential_energy(system, lj)
+-8.061904291397444e-5 Eₕ</code></pre><ul><li>using <code>DFTK.jl</code></li></ul><pre><code class="language-Julia hljs">model  = model_LDA(system; temperature=1e-3)
+basis  = PlaneWaveBasis(model; Ecut=15, kgrid=(3, 3, 3))
+self_consistent_field(basis);
+n     Energy            log10(ΔE)   log10(Δρ)   Diag   Δtime
+---   ---------------   ---------   ---------   ----   ------
+  1   -38.18166038243                    0.81    5.2
+  2   -45.38103756530        0.86        0.12    3.0    253ms
+  3   -45.54220597356       -0.79       -0.74    3.0    273ms
+  4   -45.55809718591       -1.80       -1.40    2.1    172ms
+  5   -45.55889514812       -3.10       -2.14    1.0    159ms
+  6   -45.55892123307       -4.58       -2.63    1.4    158ms
+  7   -45.55892315420       -5.72       -3.26    1.8    211ms
+  8   -45.55892314370   +   -7.98       -3.57    1.2    113ms
+  9   -45.55892319258       -7.31       -3.92    2.0    189ms
+ 10   -45.55892320440       -7.93       -4.94    1.1    142ms
+ 11   -45.55892320464       -9.63       -4.96    2.0    185ms
+ 12   -45.55892320468      -10.33       -5.44    1.0    134ms
+ 13   -45.55892320469      -11.36       -6.15    2.0    158ms</code></pre><p>For a full list of tools that support AtomsBase.jl, refer to its <a href="https://github.com/JuliaMolSim/AtomsBase.jl">official documentation</a>.</p><h2 id="Fermi.jl"><a class="docs-heading-anchor" href="#Fermi.jl">Fermi.jl</a><a id="Fermi.jl-1"></a><a class="docs-heading-anchor-permalink" href="#Fermi.jl" title="Permalink"></a></h2><p>We can use information loaded using Cclib and use it for <a href="https://github.com/FermiQC/Fermi.jl">Fermi.jl</a> calculations, which accept atom numbers and XYZ coordinates as input. The latter is accessible using Cclib&#39;s <code>getXYZ</code> function.</p><p>Note that files may contain more than one geometry, in which case the index of the geometry can be specified by passing <code>geomIdx</code> argument to <code>getXYZ</code>. Be default, <code>getXYZ</code> will use the last read geometry.</p><pre><code class="language-Julia hljs">julia&gt; using Cclib
+julia&gt; using Fermi # make sure to install using &quot;add Fermi#master&quot;
+julia&gt; xyzfile = getXYZ(&quot;./test/data/Trp_polar.fchk&quot;)
+julia&gt; mol = Molecule(molstring=xyzfile)
+julia&gt; @set basis sto-3g
+julia&gt; @energy rhf # this line should produce something similar to what is below.
+================================================================================
+|                                 Hartree-Fock                                 |
+|                                  Module  by                                  |
+|                         G.J.R Aroeira and M.M. Davis                         |
+================================================================================
+Collecting necessary integrals...
+Done in    0.44575 s
+Using GWH Guess
+Molecule:
+
+O    1.209153654800    1.766411818900   -0.017161397200
+H    2.198480007500    1.797710062700    0.012116171900
+H    0.919788188200    2.458018557000    0.629793883200
+
+
+Charge: 0   Multiplicity: 1
+
+Nuclear repulsion:    8.8880641737
+ Number of AOs:                            7
+ Number of Doubly Occupied Orbitals:       5
+ Number of Virtual Spatial Orbitals:       2
+ Guess Energy   -83.52857161946045
+
+ Iter.            E[RHF]         ΔE       Dᵣₘₛ        t     DIIS     damp
+--------------------------------------------------------------------------------
+    1    -74.9454656296  -7.495e+01   1.011e-01     0.12    false     2.18
+    2    -74.8779931590   6.747e-02   4.129e-02     0.00    false     1.47
+    3    -74.7758359210   1.022e-01   3.788e-02     0.00    false     0.00
+    4    -74.9409547085  -1.651e-01   7.125e-02     0.06     true     0.00
+    5    -74.9649972656  -2.404e-02   4.621e-02     0.00     true     0.00
+    6    -74.9650022441  -4.979e-06   7.385e-04     0.00     true     0.00
+    7    -74.9650028906  -6.464e-07   2.615e-04     0.00     true     0.00
+    8    -74.9650028947  -4.112e-09   1.362e-05     0.00     true     0.00
+    9    -74.9650028947  -3.979e-13   1.273e-07     0.13     true     0.00
+    10   -74.9650028947   0.000e+00   4.229e-08     0.00     true     0.00
+    11   -74.9650028947   0.000e+00   1.605e-08     0.00     true     0.00
+    12   -74.9650028947  -2.842e-14   1.155e-09     0.00     true     0.00
+    13   -74.9650028947  -2.842e-14   2.004e-10     0.00     true     0.00
+--------------------------------------------------------------------------------
+    RHF done in  0.43s
+    @Final RHF Energy         -74.965002894685 Eₕ
+
+   • Orbitals Summary
+
+    Orbital            Energy    Occupancy
+          1    -20.2459299842       ↿⇂
+          2     -1.2522309022       ↿⇂
+          3     -0.6007847377       ↿⇂
+          4     -0.4490335937       ↿⇂
+          5     -0.3893764439       ↿⇂
+          6      0.5733840180
+          7      0.7039953043
+
+   ✔  SCF Equations converged 😄
+--------------------------------------------------------------------------------
+ ⇒ Fermi Restricted Hartree--Fock Wave function
+ ⋅ Basis:                  sto-3g
+ ⋅ Energy:                 -74.96500289468506
+ ⋅ Occ. Spatial Orbitals:  5
+ ⋅ Vir. Spatial Orbitals:  2
+Convergence: ΔE =&gt; 2.84e-14 Dᵣₘₛ =&gt; 2.00e-10</code></pre></article><nav class="docs-footer"><a class="docs-footer-prevpage" href="../calculation/">« Additional analyses</a><div class="flexbox-break"></div><p class="footer-message">Powered by <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> and the <a href="https://julialang.org/">Julia Programming Language</a>.</p></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> version 0.27.25 on <span class="colophon-date" title="Monday 21 August 2023 19:48">Monday 21 August 2023</span>. Using Julia version 1.9.2.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>
