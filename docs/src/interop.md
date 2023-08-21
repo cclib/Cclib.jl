@@ -1,6 +1,6 @@
 # Interoperability With Other Tools
 
-# AtomsBase.jl
+## AtomsBase.jl
 
 Cclib.jl provides interoperability with [AtomsBase.jl](https://github.com/JuliaMolSim/AtomsBase.jl) by allowing to create AtomsBase systems.
 
@@ -8,7 +8,7 @@ The documentaiton below provides some essential functionality, such as creating 
 
 For a detailed overview, or if you want to know how AtomsBase.jl operates behind the scenes, refer to its official documentation.
 
-## Creating AtomsBase Systems
+### Creating AtomsBase Systems
 We can load information contained in a Cclib.jl-supported file into a system by using the following functions:
 - `make_flexible_system` - for creating an AtomsBase `FlexibleSystem`
 
@@ -64,7 +64,7 @@ julia> atoms[1]
 Atom(O, atomic_number = 8, atomic_mass = 15.999 u):
     position          : [0,0,-0.066678532]u"Å"
 ```
-## Accessing System Properties
+### Accessing System Properties
 In case we need to look at what our system contains, we can use regular `keys` to see available system-level properties and `atomkeys` to see available atom-level properties
 
 ```Julia
@@ -90,7 +90,7 @@ julia> bounding_box(system)
  :H
 ```
 
-## Updating and/or adding system properties
+### Updating and/or adding system properties
 We can also update and/or add system properties by using `update_system` function that accepts keywords arguments. Below is an example of adding data that was parsed using `ccread` to a system.
 ```Julia
 julia> using Cclib
@@ -101,7 +101,7 @@ julia> system[:nbasis]
 7
 ```
 
-# AtomsBase.jl-supported libraries
+### AtomsBase.jl-supported libraries
 
 We can use data loaded with Cclib.jl to perform calculations using other libraries that use AtomsBase.jl, such as [InteratomicPotentials.jl](https://github.com/cesmix-mit/InteratomicPotentials.jl) or [DFTK.jl](https://github.com/JuliaMolSim/DFTK.jl).
 
@@ -155,7 +155,7 @@ n     Energy            log10(ΔE)   log10(Δρ)   Diag   Δtime
 For a full list of tools that support AtomsBase.jl, refer to its [official
 documentation](https://github.com/JuliaMolSim/AtomsBase.jl).
 
-# Fermi.jl
+## Fermi.jl
 
 We can use information loaded using Cclib and use it for [Fermi.jl](https://github.com/FermiQC/Fermi.jl) calculations, which accept atom numbers and XYZ coordinates as input. The latter is accessible using Cclib's `getXYZ` function.
 
