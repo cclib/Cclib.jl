@@ -23,3 +23,11 @@ Accessing the data is identical to how one would access data in a dictionary:
 julia> mol["natom"]
 12
 ```
+## Adding and/or updating properties
+
+Once loaded, `mol` data is a regular Julia dictionary, and can be edited as such:
+```Julia
+julia> mol["myprop"] = 5
+julia> mol["myprop"]
+5
+```

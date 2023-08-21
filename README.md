@@ -8,6 +8,23 @@
 
 Extented Julia bindings to [cclib](https://github.com/cclib/cclib) library.
 
+## Quickstart
+```Julia
+# Input files can be found in the in the repo under "test" folder
+julia> using Pkg
+julia> Pkg.add("Cclib")
+julia> using Cclib
+julia> mol = ccread("uracil_two.xyz")
+julia> keys(mol)
+KeySet for a Dict{String, Any} with 4 entries. Keys:
+  "atomcoords"
+  "natom"
+  "atomnos"
+  "metadata"
+julia> mol["natom"]
+12
+```
+
 ## Features
 
 - Parsing outputs from 16 different programs: ADF, DALTON, Firefly, GAMESS (US), GAMESS-UK, Gaussian, Jaguar, Molpro, MOLCAS, MOPAC, NWChem, ORCA, Psi4, NBO, QChem and Turbomole.
